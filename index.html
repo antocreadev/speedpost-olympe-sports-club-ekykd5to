@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Olympe Sports Club : salle de sport à L'Île-Rousse</title>
+<meta name="description" content="Olympe Sports Club, la seule salle de sport indépendante au coeur de L'Île-Rousse. Rack Primal Strength, cardio, cours et coaching. Ouvert 7j/7, 7h-22h."/>
+<meta name="theme-color" content="#14171C"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="./tailwind.css"/>
+<style>
+  :root{
+    --bg:#EEF1F4; --ink:#14171C; --ink-2:#5B636E; --accent:#E11D2E; --line:#CDD4DC; --volt:#D7FF3E;
+  }
+  html{scroll-behavior:smooth;}
+  html,body{background:var(--bg);color:var(--ink);}
+  body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .font-display{font-family:'Anton',Impact,sans-serif;font-weight:400;}
+  .font-cond{font-family:'Oswald',Impact,sans-serif;}
+  .font-mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+
+  /* reveal safety net */
+  .js-ready [data-reveal]{opacity:0;transform:translateY(16px);animation:autoreveal .55s ease-out .2s forwards;}
+  @keyframes autoreveal{to{opacity:1;transform:translateY(0)}}
+
+  /* plate rack safety net */
+  .js-ready .plate{opacity:0;transform:scale(.7);animation:plate-load .55s ease-out .35s forwards;}
+  @keyframes plate-load{to{opacity:1;transform:none}}
+
+  /* fine engraved grid background for graphite plateaus */
+  .plateau{
+    background-color:var(--ink);
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:46px 46px;
+  }
+  /* brushed steel panel texture */
+  .steel{
+    background:
+      repeating-linear-gradient(180deg, rgba(20,23,28,.012) 0 2px, transparent 2px 4px),
+      var(--bg);
+  }
+
+  /* "loaded plate" card: steel border + red collar on the flank */
+  .plate-card{position:relative;border:1px solid var(--line);background:#fff;transition:transform .18s ease, box-shadow .18s ease;}
+  .plate-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent);transition:width .18s ease;}
+  .plate-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -18px rgba(20,23,28,.35);}
+  .plate-card:hover::before{width:10px;}
+
+  .volt-badge{color:var(--volt);}
+  .volt-pulse{animation:voltpulse 2.6s ease-in-out infinite;}
+  @keyframes voltpulse{0%,100%{opacity:1}50%{opacity:.62}}
+
+  .hairline{height:1px;background:linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent);}
+
+  /* photo medallion grain to homogenize low-res shot */
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;}
+
+  .num-tab{font-variant-numeric:tabular-nums;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .js-ready [data-reveal],.js-ready .plate{animation:none;opacity:1;transform:none;}
+    .volt-pulse{animation:none;}
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <nav class="mt-3 flex items-center justify-between rounded-full border border-white/10 bg-[#14171C]/85 backdrop-blur-md px-4 sm:px-5 py-2.5 text-white shadow-lg shadow-black/20">
+      <a href="#top" class="font-display text-xl sm:text-2xl tracking-wide leading-none">OLYMPE<span class="text-accent">.</span></a>
+      <div class="hidden md:flex items-center gap-6 font-cond font-medium uppercase tracking-[0.14em] text-[0.78rem] text-white/80">
+        <a href="#preuve" class="hover:text-white transition">Le plateau</a>
+        <a href="#equipement" class="hover:text-white transition">Équipement</a>
+        <a href="#cours" class="hover:text-white transition">Cours</a>
+        <a href="#tarifs" class="hover:text-white transition">Tarifs</a>
+        <a href="#infos" class="hover:text-white transition">Infos</a>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span class="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5 font-mono text-[0.66rem] tracking-wider volt-badge">
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-volt volt-pulse"></span>OUVERT 07-22 / 7J
+        </span>
+        <a href="tel:+33611024286" class="inline-flex items-center gap-1.5 rounded-full bg-accent px-3.5 sm:px-4 py-1.5 font-cond font-semibold text-[0.82rem] tracking-wide text-white hover:brightness-110 transition">
+          <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.24 1z"/></svg>
+          <span class="hidden xs:inline sm:inline">06 11 02 42 86</span><span class="sm:hidden">Appeler</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO (graphite plateau, typo + data, no photo) ============ -->
+<section class="plateau relative text-white pt-28 sm:pt-32 pb-14 sm:pb-20 overflow-hidden">
+  <div class="pointer-events-none absolute -top-20 -right-24 w-[34rem] h-[34rem] rounded-full bg-accent/10 blur-3xl"></div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 relative">
+
+    <p data-reveal class="font-mono text-[0.7rem] sm:text-[0.78rem] tracking-[0.28em] text-white/55 uppercase">Salle de sport &middot; L'Île-Rousse &middot; Balagne</p>
+
+    <h1 data-reveal class="font-display leading-[0.82] tracking-[-0.01em] mt-3" style="font-size:clamp(4.5rem,22vw,16rem)">
+      OLYMPE
+    </h1>
+
+    <div class="mt-2 sm:mt-4 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+      <div data-reveal>
+        <p class="font-cond font-medium uppercase tracking-[0.08em] text-white/90" style="font-size:clamp(1.15rem,3.4vw,1.75rem)">
+          La salle qui charge la barre, au coeur de L'Île-Rousse.
+        </p>
+        <p class="mt-4 max-w-xl text-[1.02rem] leading-relaxed text-white/72">
+          La seule salle de sport indépendante du centre de L'Île-Rousse. Rack Primal Strength complet, cardio, cours collectifs et coaching. Ouvert 7j/7, de 7h à 22h, à deux pas de la mer.
+        </p>
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a href="tel:+33611024286" class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-cond font-semibold tracking-wide text-white hover:brightness-110 transition">
+            Appeler le 06 11 02 42 86
+          </a>
+          <a href="#preuve" class="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 font-cond font-semibold tracking-wide text-white hover:bg-white/10 transition">
+            Voir le plateau
+          </a>
+        </div>
+      </div>
+
+      <!-- Signature: rack of weight plates (small SVG decor module) -->
+      <div data-reveal class="lg:justify-self-end w-full">
+        <div id="rack" class="select-none cursor-pointer rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-[0.64rem] tracking-[0.2em] text-white/45 uppercase">// rack chargé</span>
+            <span class="font-cond font-semibold text-volt num-tab"><span id="load-total">160</span> KG</span>
+          </div>
+          <svg viewBox="0 0 360 120" class="w-full h-auto" role="img" aria-label="Barre d'haltère chargée de plaques">
+            <!-- bar -->
+            <rect x="20" y="56" width="320" height="8" rx="4" fill="#7d8694"/>
+            <rect x="20" y="58" width="320" height="2" fill="#aeb6c0"/>
+            <!-- sleeve collars -->
+            <rect x="150" y="50" width="6" height="20" rx="2" fill="#5B636E"/>
+            <rect x="204" y="50" width="6" height="20" rx="2" fill="#5B636E"/>
+            <!-- plates left (heavy inner red -> light outer) -->
+            <rect class="plate" data-x="-26" x="120" y="22" width="22" height="76" rx="5" fill="#E11D2E"/>
+            <rect class="plate" data-x="-22" x="98"  y="30" width="18" height="60" rx="5" fill="#E11D2E"/>
+            <rect class="plate" data-x="-18" x="80"  y="38" width="14" height="44" rx="4" fill="#3a3f47"/>
+            <rect class="plate" data-x="-14" x="66"  y="44" width="11" height="32" rx="3" fill="#3a3f47"/>
+            <!-- plates right -->
+            <rect class="plate" data-x="26" x="218" y="22" width="22" height="76" rx="5" fill="#E11D2E"/>
+            <rect class="plate" data-x="22" x="244" y="30" width="18" height="60" rx="5" fill="#E11D2E"/>
+            <rect class="plate" data-x="18" x="266" y="38" width="14" height="44" rx="4" fill="#3a3f47"/>
+            <rect class="plate" data-x="14" x="283" y="44" width="11" height="32" rx="3" fill="#3a3f47"/>
+          </svg>
+          <p class="mt-2 text-center font-mono text-[0.6rem] tracking-[0.18em] text-white/35 uppercase">survolez pour charger</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- metrics band -->
+    <div data-reveal class="mt-12 sm:mt-14 grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-white/10">
+      <div class="bg-white/[0.03] px-5 py-5">
+        <div class="font-cond font-semibold leading-none num-tab" style="font-size:clamp(2rem,7vw,3.2rem)"><span class="text-volt">4.6</span><span class="text-white/40 text-[0.45em] align-top ml-1">★</span></div>
+        <div class="font-mono text-[0.62rem] tracking-[0.18em] text-white/45 uppercase mt-2">// note google &middot; 19 avis</div>
+      </div>
+      <div class="bg-white/[0.03] px-5 py-5">
+        <div class="font-cond font-semibold leading-none num-tab text-white" style="font-size:clamp(2rem,7vw,3.2rem)">07-22</div>
+        <div class="font-mono text-[0.62rem] tracking-[0.18em] text-white/45 uppercase mt-2">// amplitude horaire</div>
+      </div>
+      <div class="bg-white/[0.03] px-5 py-5">
+        <div class="font-cond font-semibold leading-none num-tab text-white" style="font-size:clamp(2rem,7vw,3.2rem)">7<span class="text-white/40 text-[0.5em]">J/7</span></div>
+        <div class="font-mono text-[0.62rem] tracking-[0.18em] text-white/45 uppercase mt-2">// ouvert tous les jours</div>
+      </div>
+      <div class="bg-white/[0.03] px-5 py-5">
+        <div class="font-cond font-semibold leading-none num-tab text-white" style="font-size:clamp(2rem,7vw,3.2rem)">20<span class="text-white/40 text-[0.5em]">€</span></div>
+        <div class="font-mono text-[0.62rem] tracking-[0.18em] text-white/45 uppercase mt-2">// la semaine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREUVE RÉELLE (steel panel, real photo medallion) ============ -->
+<section id="preuve" class="steel py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <!-- real photo, framed, never stretched -->
+      <figure data-reveal class="relative mx-auto w-full max-w-[520px]">
+        <div class="absolute -inset-3 border border-line rounded-[18px]"></div>
+        <div class="grain relative overflow-hidden rounded-2xl border border-line bg-ink">
+          <img src="./assets/images/olympe-club-real.webp" alt="Le plateau musculation d'Olympe Sports Club : rack Primal Strength, bancs, miroirs"
+               class="w-full h-auto object-cover" style="filter:brightness(.98) saturate(1.05) contrast(1.04)" loading="lazy" decoding="async"/>
+        </div>
+        <figcaption class="mt-4 font-mono text-[0.66rem] tracking-[0.16em] text-ink-2 uppercase">// le vrai plateau, photographié sur place</figcaption>
+      </figure>
+
+      <div>
+        <p data-reveal class="font-mono text-[0.72rem] tracking-[0.24em] text-accent uppercase">La preuve</p>
+        <h2 data-reveal class="font-display uppercase leading-[0.92] mt-3" style="font-size:clamp(2.2rem,8vw,4.4rem)">
+          La seule salle pro<br/><span class="text-accent">au coeur de la ville</span>
+        </h2>
+        <p data-reveal class="mt-5 text-[1.05rem] leading-relaxed text-ink-2 max-w-xl">
+          Rack Primal Strength complet, câbles, bancs réglables et miroirs full-wall. Un plateau de musculation niveau club, complété d'un espace cardio à la pointe. Sol caoutchouc, lumière franche, espace propre et carré.
+        </p>
+        <ul data-reveal class="mt-7 grid sm:grid-cols-2 gap-3">
+          <li class="plate-card pl-5 pr-4 py-3.5 rounded-lg"><span class="font-cond font-semibold uppercase tracking-wide">Rack Primal Strength</span><span class="block text-sm text-ink-2 mt-0.5">Haltères complets, barres, disques.</span></li>
+          <li class="plate-card pl-5 pr-4 py-3.5 rounded-lg"><span class="font-cond font-semibold uppercase tracking-wide">Câbles &amp; machines</span><span class="block text-sm text-ink-2 mt-0.5">Poulies, guidées, multi-groupes.</span></li>
+          <li class="plate-card pl-5 pr-4 py-3.5 rounded-lg"><span class="font-cond font-semibold uppercase tracking-wide">Plateau cardio</span><span class="block text-sm text-ink-2 mt-0.5">Tapis, vélos, à la pointe.</span></li>
+          <li class="plate-card pl-5 pr-4 py-3.5 rounded-lg"><span class="font-cond font-semibold uppercase tracking-wide">Miroirs full-wall</span><span class="block text-sm text-ink-2 mt-0.5">Travail propre, posture suivie.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÉQUIPEMENT (loaded plate grid) ============ -->
+<section id="equipement" class="py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+      <div>
+        <p data-reveal class="font-mono text-[0.72rem] tracking-[0.24em] text-accent uppercase">Le matériel</p>
+        <h2 data-reveal class="font-display uppercase leading-[0.92] mt-2" style="font-size:clamp(2rem,7vw,3.6rem)">Tout pour charger</h2>
+      </div>
+      <p data-reveal class="font-mono text-[0.68rem] tracking-[0.16em] text-ink-2 uppercase max-w-xs">// fonte, câbles, cardio &middot; en libre accès</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3">
+      <article data-reveal class="plate-card rounded-xl overflow-hidden">
+        <div class="overflow-hidden"><img src="./assets/images/fitness-gym-weights-unsplash.jpg" alt="Haltères et rack de musculation" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async"/></div>
+        <div class="p-5">
+          <span class="font-mono text-[0.62rem] tracking-[0.16em] text-accent uppercase">// fonte libre</span>
+          <h3 class="font-cond font-semibold uppercase tracking-wide text-xl mt-1">Haltères &amp; rack</h3>
+          <p class="text-sm text-ink-2 mt-1.5 leading-relaxed">Du léger au lourd, racks chargés en continu. Bancs réglables pour tous les mouvements.</p>
+        </div>
+      </article>
+      <article data-reveal class="plate-card rounded-xl overflow-hidden md:mt-8">
+        <div class="overflow-hidden"><img src="./assets/images/fitness-gym-equipment-unsplash.jpg" alt="Machines guidées et câbles" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async"/></div>
+        <div class="p-5">
+          <span class="font-mono text-[0.62rem] tracking-[0.16em] text-accent uppercase">// guidé</span>
+          <h3 class="font-cond font-semibold uppercase tracking-wide text-xl mt-1">Câbles &amp; machines</h3>
+          <p class="text-sm text-ink-2 mt-1.5 leading-relaxed">Poulies et machines multi-groupes pour isoler, sécuriser et progresser sereinement.</p>
+        </div>
+      </article>
+      <article data-reveal class="plate-card rounded-xl overflow-hidden">
+        <div class="overflow-hidden"><img src="./assets/images/fitness-gym-cardio-unsplash.jpg" alt="Plateau cardio : tapis et vélos" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async"/></div>
+        <div class="p-5">
+          <span class="font-mono text-[0.62rem] tracking-[0.16em] text-accent uppercase">// cardio</span>
+          <h3 class="font-cond font-semibold uppercase tracking-wide text-xl mt-1">Plateau cardio</h3>
+          <p class="text-sm text-ink-2 mt-1.5 leading-relaxed">Tapis et vélos à la pointe pour l'échauffement, l'endurance et la récupération active.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÉTRIQUES (graphite console, counters) ============ -->
+<section class="plateau text-white py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <p data-reveal class="font-mono text-[0.72rem] tracking-[0.24em] text-white/45 uppercase text-center">// console &middot; les chiffres du club</p>
+    <div data-reveal class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-white/10" id="metrics">
+      <div class="bg-white/[0.03] px-6 py-9 text-center">
+        <div class="font-cond font-semibold leading-none num-tab text-volt" style="font-size:clamp(2.6rem,9vw,5rem)" data-count="22" data-from="7" data-prefix="07-">07-22</div>
+        <div class="font-mono text-[0.64rem] tracking-[0.16em] text-white/45 uppercase mt-3">amplitude / jour</div>
+      </div>
+      <div class="bg-white/[0.03] px-6 py-9 text-center">
+        <div class="font-cond font-semibold leading-none num-tab text-white" style="font-size:clamp(2.6rem,9vw,5rem)" data-count="7" data-suffix="J">7J</div>
+        <div class="font-mono text-[0.64rem] tracking-[0.16em] text-white/45 uppercase mt-3">jours sur 7</div>
+      </div>
+      <div class="bg-white/[0.03] px-6 py-9 text-center">
+        <div class="font-cond font-semibold leading-none num-tab text-white" style="font-size:clamp(2.6rem,9vw,5rem)" data-count="15" data-suffix="%">15%</div>
+        <div class="font-mono text-[0.64rem] tracking-[0.16em] text-white/45 uppercase mt-3">remise étudiant</div>
+      </div>
+      <div class="bg-white/[0.03] px-6 py-9 text-center">
+        <div class="font-cond font-semibold leading-none num-tab text-volt" style="font-size:clamp(2.6rem,9vw,5rem)" data-count="4.6" data-decimals="1">4.6</div>
+        <div class="font-mono text-[0.64rem] tracking-[0.16em] text-white/45 uppercase mt-3">note &middot; 19 avis</div>
+      </div>
+    </div>
+    <p data-reveal class="mt-8 text-center text-white/55 text-sm font-mono tracking-wider">parking gratuit &middot; accès locaux et visiteurs &middot; sans engagement long</p>
+  </div>
+</section>
+
+<!-- ============ COURS & COACHING (programme / séries) ============ -->
+<section id="cours" class="steel py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p data-reveal class="font-mono text-[0.72rem] tracking-[0.24em] text-accent uppercase">Le programme</p>
+        <h2 data-reveal class="font-display uppercase leading-[0.92] mt-2" style="font-size:clamp(2rem,7vw,3.6rem)">Cours &amp; coaching</h2>
+        <p data-reveal class="mt-5 text-ink-2 leading-relaxed max-w-md">
+          Au-delà du plateau libre, des cours collectifs et un coaching sur mesure. Coach certifié (carte pro DRAJES), suivi personnalisé, programmes d'initiation pour débutants. Coaching éligible au crédit d'impôt services à la personne.
+        </p>
+      </div>
+
+      <ol data-reveal class="divide-y divide-line border-y border-line">
+        <li class="flex items-center gap-5 py-5">
+          <span class="font-display text-3xl text-line w-12 shrink-0">01</span>
+          <div class="flex-1"><h3 class="font-cond font-semibold uppercase tracking-wide text-lg">Yoga</h3><p class="text-sm text-ink-2">Mobilité, souffle, récupération.</p></div>
+          <span class="font-mono text-[0.62rem] tracking-wider text-ink-2 uppercase hidden sm:block">// collectif</span>
+        </li>
+        <li class="flex items-center gap-5 py-5">
+          <span class="font-display text-3xl text-line w-12 shrink-0">02</span>
+          <div class="flex-1"><h3 class="font-cond font-semibold uppercase tracking-wide text-lg">Spinning / Biking</h3><p class="text-sm text-ink-2">Cardio intense, rythme et endurance.</p></div>
+          <span class="font-mono text-[0.62rem] tracking-wider text-ink-2 uppercase hidden sm:block">// collectif</span>
+        </li>
+        <li class="flex items-center gap-5 py-5">
+          <span class="font-display text-3xl text-line w-12 shrink-0">03</span>
+          <div class="flex-1"><h3 class="font-cond font-semibold uppercase tracking-wide text-lg">Circuit training</h3><p class="text-sm text-ink-2">Full-body, brûle-graisse, en série.</p></div>
+          <span class="font-mono text-[0.62rem] tracking-wider text-ink-2 uppercase hidden sm:block">// collectif</span>
+        </li>
+        <li class="flex items-center gap-5 py-5">
+          <span class="font-display text-3xl text-accent w-12 shrink-0">04</span>
+          <div class="flex-1"><h3 class="font-cond font-semibold uppercase tracking-wide text-lg">Coaching personnalisé</h3><p class="text-sm text-ink-2">Suivi individuel, crédit d'impôt SAP.</p></div>
+          <span class="font-mono text-[0.62rem] tracking-wider text-accent uppercase hidden sm:block">// sur mesure</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TARIFS (two plates) ============ -->
+<section id="tarifs" class="py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="text-center mb-10">
+      <p data-reveal class="font-mono text-[0.72rem] tracking-[0.24em] text-accent uppercase">Les formules</p>
+      <h2 data-reveal class="font-display uppercase leading-[0.92] mt-2" style="font-size:clamp(2rem,7vw,3.6rem)">Chargez votre accès</h2>
+      <p data-reveal class="mt-3 text-ink-2">Sans engagement long. À régler sur place ou par téléphone.</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 max-w-3xl mx-auto">
+      <article data-reveal class="plate-card rounded-2xl p-7 sm:p-8">
+        <div class="flex items-center justify-between">
+          <span class="font-cond font-semibold uppercase tracking-wide text-ink-2">Semaine</span>
+          <span class="inline-flex items-center rounded-full bg-accent/10 text-accent font-mono text-[0.6rem] tracking-[0.16em] uppercase px-3 py-1">idéal séjour</span>
+        </div>
+        <div class="mt-4 flex items-end gap-2">
+          <span class="font-display leading-none num-tab" style="font-size:clamp(3.5rem,12vw,5.5rem)">20</span>
+          <span class="font-cond font-semibold text-2xl text-ink-2 mb-2">€ <span class="text-base font-normal">/ semaine</span></span>
+        </div>
+        <p class="mt-3 text-sm text-ink-2 leading-relaxed">Accès complet au plateau et au cardio pendant 7 jours. Parfait pour les vacanciers actifs qui gardent leur routine au bord de la mer.</p>
+        <a href="tel:+33611024286" class="mt-6 inline-flex w-full justify-center rounded-full bg-ink text-white font-cond font-semibold tracking-wide px-6 py-3 hover:bg-accent transition">Réserver par téléphone</a>
+      </article>
+
+      <article data-reveal class="plate-card rounded-2xl p-7 sm:p-8">
+        <div class="flex items-center justify-between">
+          <span class="font-cond font-semibold uppercase tracking-wide text-ink-2">Étudiant</span>
+          <span class="inline-flex items-center rounded-full bg-volt/20 text-ink font-mono text-[0.6rem] tracking-[0.16em] uppercase px-3 py-1">jeune public</span>
+        </div>
+        <div class="mt-4 flex items-end gap-2">
+          <span class="font-display leading-none num-tab text-accent" style="font-size:clamp(3.5rem,12vw,5.5rem)">-15</span>
+          <span class="font-cond font-semibold text-2xl text-ink-2 mb-2">% <span class="text-base font-normal">/ abonnement</span></span>
+        </div>
+        <p class="mt-3 text-sm text-ink-2 leading-relaxed">Remise étudiant sur l'abonnement. Une salle accessible et inclusive, pensée pour les jeunes de la Balagne. Justificatif demandé sur place.</p>
+        <a href="tel:+33611024286" class="mt-6 inline-flex w-full justify-center rounded-full bg-ink text-white font-cond font-semibold tracking-wide px-6 py-3 hover:bg-accent transition">Demander la remise</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GÉRANT ============ -->
+<section class="steel py-16 sm:py-24">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 text-center">
+    <img data-reveal src="./assets/images/olympe-facebook-profile.jpg" alt="Alexandre Scarsetti, gérant d'Olympe Sports Club"
+         class="mx-auto w-24 h-24 rounded-full object-cover border-4 border-accent" loading="lazy" decoding="async"/>
+    <blockquote data-reveal class="mt-7 font-cond font-medium leading-snug text-ink" style="font-size:clamp(1.5rem,5vw,2.4rem)">
+      « Le gérant est très sympathique, compétent et professionnel. Équipements cardio et musculation complets, très propre. »
+    </blockquote>
+    <p data-reveal class="mt-5 font-mono text-[0.66rem] tracking-[0.18em] text-ink-2 uppercase">// avis client &middot; google 4.6★</p>
+    <p data-reveal class="mt-2 font-cond font-semibold uppercase tracking-wide text-accent text-lg">Alexandre Scarsetti, gérant</p>
+  </div>
+</section>
+
+<!-- ============ INFOS + MAPS ============ -->
+<section id="infos" class="plateau text-white py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-stretch">
+      <div data-reveal>
+        <p class="font-mono text-[0.72rem] tracking-[0.24em] text-volt uppercase">Venir s'entraîner</p>
+        <h2 class="font-display uppercase leading-[0.92] mt-2" style="font-size:clamp(2rem,7vw,3.6rem)">Infos pratiques</h2>
+
+        <dl class="mt-8 space-y-px rounded-2xl overflow-hidden border border-white/10">
+          <div class="bg-white/[0.03] px-5 py-4 flex items-baseline gap-4">
+            <dt class="font-mono text-[0.6rem] tracking-[0.18em] text-white/45 uppercase w-24 shrink-0">Adresse</dt>
+            <dd class="font-cond text-lg">Bd Pierre Pasquini, 20220 L'Île-Rousse</dd>
+          </div>
+          <div class="bg-white/[0.03] px-5 py-4 flex items-baseline gap-4">
+            <dt class="font-mono text-[0.6rem] tracking-[0.18em] text-white/45 uppercase w-24 shrink-0">Horaires</dt>
+            <dd class="font-cond text-lg">7j/7, de 07:00 à 22:00</dd>
+          </div>
+          <div class="bg-white/[0.03] px-5 py-4 flex items-baseline gap-4">
+            <dt class="font-mono text-[0.6rem] tracking-[0.18em] text-white/45 uppercase w-24 shrink-0">Téléphone</dt>
+            <dd class="font-cond text-lg"><a href="tel:+33611024286" class="hover:text-volt transition">06 11 02 42 86</a></dd>
+          </div>
+          <div class="bg-white/[0.03] px-5 py-4 flex items-baseline gap-4">
+            <dt class="font-mono text-[0.6rem] tracking-[0.18em] text-white/45 uppercase w-24 shrink-0">Parking</dt>
+            <dd class="font-cond text-lg">Gratuit, à proximité</dd>
+          </div>
+        </dl>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="tel:+33611024286" class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-cond font-semibold tracking-wide text-white hover:brightness-110 transition">Appeler le club</a>
+          <a href="https://www.google.com/maps/place/Olympe+sports+club/data=!4m7!3m6!1s0x12d0c5e582ea66cf:0x3ae59d8229c4e3ed!8m2!3d42.6312639!4d8.9318137!16s%2Fg%2F11jbnkk5q1!19sChIJz2bqguXF0BIR7ePEKYKd5To" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 font-cond font-semibold tracking-wide text-white hover:bg-white/10 transition">Itinéraire</a>
+        </div>
+      </div>
+
+      <div data-reveal class="min-h-[320px] lg:min-h-full rounded-2xl overflow-hidden border border-white/10">
+        <iframe src="https://maps.google.com/maps?q=42.6312639,8.9318137&z=15&output=embed" title="Olympe Sports Club sur Google Maps" class="w-full h-full min-h-[320px]" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="plateau text-white border-t border-white/10 pt-12 pb-8">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="font-display leading-[0.82] tracking-[-0.01em] text-white/95" style="font-size:clamp(3.5rem,16vw,11rem)">OLYMPE<span class="text-accent">.</span></div>
+    <div class="mt-6 hairline opacity-30"></div>
+    <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-white/55">
+      <div class="font-cond uppercase tracking-wide">
+        Olympe Sports Club &middot; Bd Pierre Pasquini, 20220 L'Île-Rousse &middot; <a href="tel:+33611024286" class="hover:text-volt transition">06 11 02 42 86</a>
+      </div>
+      <div class="font-mono text-[0.66rem] tracking-[0.16em] uppercase text-white/40">Site réalisé avec soin par SpeedPost.fr</div>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { animate, inView, stagger } from 'https://cdn.jsdelivr.net/npm/motion@10.18.0/+esm';
+
+  document.documentElement.classList.add('js-ready');
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // one-shot reveals
+  inView('[data-reveal]', (el) => {
+    if (reduce) { el.style.opacity = 1; el.style.transform = 'none'; return; }
+    animate(el, { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0)'] },
+            { duration: 0.5, easing: [0.2, 0.7, 0.2, 1] });
+  }, { amount: 0.18 });
+
+  // signature: load the plates one-shot when rack enters viewport
+  inView('#rack', () => {
+    if (reduce) return;
+    const plates = document.querySelectorAll('#rack .plate');
+    plates.forEach(p => {
+      const dx = parseFloat(p.getAttribute('data-x')) || 0;
+      p.style.transform = `scale(.7) translateX(${dx}px)`;
+      p.style.opacity = '0';
+    });
+    animate('#rack .plate',
+      { opacity: [0, 1], transform: ['scale(.7)', 'scale(1)'] },
+      { delay: stagger(0.085), duration: 0.5, easing: [0.2, 0.7, 0.2, 1] });
+  }, { amount: 0.4 });
+
+  // hover/tap on rack: small count-up "total charge" rep effect
+  const rack = document.getElementById('rack');
+  const loadEl = document.getElementById('load-total');
+  const fireLoad = () => {
+    if (reduce || !loadEl) return;
+    const obj = { v: 0 };
+    animate(obj, { v: 160 }, { duration: 0.6, easing: [0.2,0.7,0.2,1],
+      onUpdate: () => { loadEl.textContent = Math.round(obj.v); } });
+  };
+  if (rack) {
+    rack.addEventListener('mouseenter', fireLoad);
+    rack.addEventListener('click', fireLoad);
+  }
+
+  // metrics console count-up, one-shot
+  inView('#metrics', () => {
+    if (reduce) return;
+    document.querySelectorAll('#metrics [data-count]').forEach(el => {
+      const target = parseFloat(el.getAttribute('data-count'));
+      const from = parseFloat(el.getAttribute('data-from')) || 0;
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      const obj = { v: from };
+      animate(obj, { v: target }, { duration: 0.85, easing: [0.2,0.7,0.2,1],
+        onUpdate: () => { el.textContent = prefix + obj.v.toFixed(decimals) + suffix; } });
+    });
+  }, { amount: 0.4 });
+</script>
+</body>
+</html>
